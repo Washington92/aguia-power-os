@@ -11,9 +11,8 @@ body{margin:0;height:100%;background:var(--bg);color:var(--tx);font:14px Sora,sy
 .logo{display:flex;align-items:center;gap:12px;color:#fff;font-weight:800;font-size:18px;line-height:1.1;padding:8px 12px 22px;border-bottom:1px solid rgba(47,128,255,0.35);margin-bottom:6px;white-space:nowrap;letter-spacing:.02em}
 .logo img{width:40px;height:40px;border-radius:10px;object-fit:cover;border:2px solid rgba(47,128,255,0.3);box-shadow:0 2px 8px rgba(47,128,255,0.25)}
 .logo small{display:inline;color:#9db6e6;font-weight:400;font-size:9px;letter-spacing:.12em;margin:0 3px 0 0}
-.nav{all:unset;cursor:pointer;display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:12px;font-size:13px;font-weight:600;color:#c2d4f0;transition:background .2s, color .2s, transform .2s}
-.nav:hover{background:rgba(47,128,255,0.12);color:#fff;transform:translateX(2px)}
-.nav.on{background:linear-gradient(135deg,var(--blue),#3a9eff);color:#fff;box-shadow:0 6px 18px rgba(47,128,255,0.35);font-weight:700}.nav:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.nav{all:unset;cursor:pointer;display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;color:#dde8f5;transition:background .15s, color .15s}
+.nav:hover{background:#2f80ff22;color:#fff}.nav.on{background:#2f80ff;color:#fff}.nav:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .foot{margin-top:auto;font-size:11px;padding:14px 10px;color:#8ba3d1;border-top:1px solid rgba(255,255,255,0.08);margin-top:12px}
 .main{overflow:auto;padding:24px 28px 40px}
 h1{font-size:22px;margin:0 0 4px}.sub{color:var(--mu);margin:0 0 20px}
@@ -91,7 +90,7 @@ let OS=[];
 const CL=[{n:'Smart Fit - Água Santa',end:'Av. Água Santa, 123 - São Paulo/SP',tel:''},{n:'Smart Fit - Lapa',end:'R. Catão, 88 - São Paulo/SP',tel:''},{n:'Velocit - Sorocaba',end:'Av. Itavuvu, 410 - Sorocaba/SP',tel:''},{n:'Velocit - Minas Gerais',end:'Av. Afonso Pena, 900 - Belo Horizonte/MG',tel:''},{n:'Bio Ritmo - Lapa',end:'R. Clélia, 215 - São Paulo/SP',tel:''}];
 const TEC=['João','Carlos','Pedro','Marcos','Lucas','Diego'];
 const AG=[['08:00','Velocit - Sorocaba','Manutenção','João / Carlos','ok','2025-10-01'],['09:00','Smart Fit - Água Santa','Instalação','Washington / Marcos','and','2025-10-01'],['14:00','Velocit - Sorocaba','Manutenção','João / Lucas','and','2025-10-01'],['16:00','Bio Ritmo - Lapa','Preventiva','Washington / Diego','ab','2025-10-01']];
-const NAV=[['dash','🏠','Dashboard'],['os','📋','Ordens de Serviço'],['ag','📅','Agenda'],['cli','👥','Clientes'],['uni','🏢','Unidades'],['col','🧑‍🔧','Colaboradores'],['prod','📦','Produtos'],['rel','📊','Relatórios'],['perm','🔐','Permissões'],['cfg','⚙️','Configurações']];
+const NAV=[['dash','🏠','Dashboard'],['os','📋','Ordens de Serviço'],['ag','📅','Agenda'],['cli','👥','Clientes'],['uni','🏢','Unidades'],['col','🧑‍🔧','Colaboradores'],['prod','📦','Produtos'],['rel','📊','Relatórios'],['perm','🔐','Permissões'],['cfg','⚙️','Configurações'],['set','⚙','Configurações avançadas']];
 let V='dash',F='todas',Q='',W=null,nm='';
 const $=i=>document.getElementById(i),n=s=>VO().filter(o=>o.s==s).length,pc=s=>VO().length?Math.round(n(s)/VO().length*100):0;
 const bd=o=>`<button class="b ${o.s}" title="Clique para mudar o status" onclick="cyc(${o.id})">${SM[o.s]}</button>`;
@@ -195,6 +194,7 @@ function VO(){return MODE=='adm'?OS:OS.filter(o=>o.e.includes(ME.t))}
 function can(a){return MODE=='adm'||a!='criar'}
 function ok(v){return MODE=='adm'||['dash','os','ag','det'].includes(v)}
 function NAVF(){return NAV.filter(x=>MODE=='adm'||['dash','os','ag'].includes(x[0]))}
+function SUB(){return [['dash','Início'],['os','OS'],['ag','Agenda'],['cli','Clientes'],['col','Equipe'],['perm','Acessos']].map(([k,t])=>`<button class="nav ${V==k?'on':''}" onclick="go('${k}')"><span>${({dash:'🏠',os:'📋',ag:'📅',cli:'👥',col:'🧑‍🔧',perm:'🔐'})[k]||''}</span><span>${t}</span></button>`).join('')}
 function tecs(){return US.filter(u=>u.r.includes('tec')).map(u=>u.t||u.n)}
 function reabrir(){if(MODE!='adm')return toast('Só o administrador pode reabrir um checklist finalizado');C().fin=false;rd()}
 function sm(m){MODE=m;V='dash';draw()}
