@@ -195,7 +195,7 @@ function can(a){return MODE=='adm'||a!='criar'}
 function ok(v){return MODE=='adm'||['dash','os','ag','det'].includes(v)}
 function NAVF(){return NAV.filter(x=>MODE=='adm'||['dash','os','ag'].includes(x[0]))}
 function SUB(){return [['dash','Início'],['os','OS'],['ag','Agenda'],['cli','Clientes'],['col','Equipe'],['perm','Acessos']].map(([k,t])=>`<button class="nav ${V==k?'on':''}" onclick="go('${k}')"><span>${({dash:'🏠',os:'📋',ag:'📅',cli:'👥',col:'🧑‍🔧',perm:'🔐'})[k]||''}</span><span>${t}</span></button>`).join('')}
-function pesq(){const q=prompt('Pesquisar cliente/unidade:'); if(q) toast('Busca: '+q);} function cadUni(){const n=prompt('Nome da nova unidade:'); const sig=prompt('Sigla:')||''; if(n){if(typeof CLI!='undefined')CLI.push({n,sig}); else window.CLI=[{n,sig}]; toast('Unidade cadastrada: '+n); draw();}}
+function pesq(){const q=prompt('Pesquisar cliente/unidade:'); if(q) toast('Busca: '+q);} function cadUni(){const n=prompt('Nome da nova unidade:'); const sig=prompt('Sigla:')||''; if(n){if(typeof CL!='undefined')CL.push({n,sig}); else window.CL=[{n,sig}]; toast('Unidade cadastrada: '+n); draw();}}
 function tecs(){return US.filter(u=>u.r.includes('tec')).map(u=>u.t||u.n)}
 function reabrir(){if(MODE!='adm')return toast('Só o administrador pode reabrir um checklist finalizado');C().fin=false;rd()}
 function sm(m){MODE=m;V='dash';draw()}
